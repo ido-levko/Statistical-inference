@@ -62,8 +62,10 @@ Sample does not look Gaussian (reject H0)"""
 Let the significance level be α = 0.1. How do you
 reconcile the test result with the QQ-plot."""
 
+
+
 def linear_regression_1c(correlation, x_mean, x_var, y_mean, y_var):
-    a = correlation / x_var
+    a = correlation * np.sqrt(y_var) / np.sqrt(x_var)
     b = y_mean - a*x_mean
     print(f'a value is {a}')
     print(f'b value is {b}')
@@ -73,3 +75,15 @@ if __name__ == "__main__":
     # qqplot_1a(x)
     # shapiro_test_1b(x)
     linear_regression_1c(-0.8012, 51, 474.207, 423.333, 6678.16)
+
+    # x = np.array([i for i in range(1, 31)])
+    # y = np.array([-0.3 * i + 5 for i in x])
+    # x_mean = np.mean(x)
+    # x_var = np.var(x)
+    # y_mean = np.mean(y)
+    # y_var = np.var(y)
+    # cor = np.corrcoef(x, y)[0, 1]
+    # x_norm = x - x_mean
+    # y_norm = y - y_mean
+    #
+    # linear_regression_1c(cor, x_mean, x_var, y_mean, y_var)
