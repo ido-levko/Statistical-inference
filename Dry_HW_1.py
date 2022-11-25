@@ -15,6 +15,8 @@ sinc
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
+import statsmodels.api as sm
+import pylab as py
 import pylab
 import seaborn as sns
 
@@ -36,12 +38,18 @@ def plot_x(x):
     plt.show()
 
 x = np.array([1000*v for v in [-0.6, 3.1, 25.3, -16.8, -7.1, -6.2, 25.2, 22.6, 26.0]])
-plot_x(x)
+# y = np.array([i for i in range(0,100)])
+#plot_x(x)
 
 # normalize x
 x_norm = stats.zscore(x)
-plot_x(x_norm)
+#plot_x(x_norm)
 
+# data_points = np.random.normal(0, 1, 100)
+# print(data_points)
+
+sm.qqplot(x, line ='45')
+py.show()
 """
 in both cases we see that the data is not normally distributed.
 we would expect to see a lot of dots in the middle and a few on the edges. but this is not the case.
