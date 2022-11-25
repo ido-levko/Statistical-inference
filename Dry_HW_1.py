@@ -15,6 +15,7 @@ sinc
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
+from scipy.stats import shapiro
 import pylab
 import seaborn as sns
 import statsmodels.api as sm
@@ -42,7 +43,7 @@ we would expect to see a lot of dots in the middle and a few on the edges. but t
 """(b) Carry out the Shapiro-Wilk test of. 
 Let the significance level be α = 0.1. How do you
 reconcile the test result with the QQ-plot."""
-from scipy.stats import shapiro
+
 
 def shapiro_test_1b(x):
     stat, p = shapiro(x)
@@ -54,8 +55,21 @@ def shapiro_test_1b(x):
     else:
         print('Sample does not look Gaussian (reject H0)')
 
+"""Statistics=0.856, p=0.087
+Sample does not look Gaussian (reject H0)"""
+
+"""(c) Carry out the Shapiro-Wilk test of. 
+Let the significance level be α = 0.1. How do you
+reconcile the test result with the QQ-plot."""
+
+def linear_regression_1c(correlation, x_mean, x_var, y_mean, y_var):
+    a = correlation / x_var
+    b = y_mean - a*x_mean
+    print(f'a value is {a}')
+    print(f'b value is {b}')
 
 
 if __name__ == "__main__":
     # qqplot_1a(x)
-    shapiro_test_1b(x)
+    # shapiro_test_1b(x)
+    linear_regression_1c(-0.8012, 51, 474.207, 423.333, 6678.16)
