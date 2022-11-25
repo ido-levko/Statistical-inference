@@ -15,10 +15,10 @@ sinc
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
-import statsmodels.api as sm
-import pylab as py
 import pylab
 import seaborn as sns
+import statsmodels.api as sm
+import pylab as py
 
 """
 Consider the annual rates of tax return of different companies for the year 2021. 
@@ -27,29 +27,13 @@ The 10 observations are in thousands. Negative numbers mean that the company own
 Use these 10 observations to complete the following.
 
 (a) Construct a Q-Q plot. Does the data seem to be normally distributed? Explain."""
-def plot_x(x):
-    # Create Figure and Axes instances
-    fig,ax = plt.subplots(1)
-    # Make your plot, set your axes labels
-    ax.plot(x,np.zeros_like(x), 'o')
-    # Turn off tick labels
-    ax.set_yticklabels([])
 
-    plt.show()
+x = np.array([1000 * v for v in [-0.6, 3.1, 25.3, -16.8, -7.1, -6.2, 25.2, 22.6, 26.0]])
 
-x = np.array([1000*v for v in [-0.6, 3.1, 25.3, -16.8, -7.1, -6.2, 25.2, 22.6, 26.0]])
-# y = np.array([i for i in range(0,100)])
-#plot_x(x)
+def qqplot_1a(x):
+    sm.qqplot(x, line='45')
+    py.show()
 
-# normalize x
-x_norm = stats.zscore(x)
-#plot_x(x_norm)
-
-# data_points = np.random.normal(0, 1, 100)
-# print(data_points)
-
-sm.qqplot(x, line ='45')
-py.show()
 """
 in both cases we see that the data is not normally distributed.
 we would expect to see a lot of dots in the middle and a few on the edges. but this is not the case.
@@ -58,3 +42,20 @@ we would expect to see a lot of dots in the middle and a few on the edges. but t
 """(b) Carry out the Shapiro-Wilk test of. 
 Let the significance level be α = 0.1. How do you
 reconcile the test result with the QQ-plot."""
+from scipy.stats import shapiro
+
+def shapiro_test_1b(x):
+    stat, p = shapiro(x)
+    print('Statistics=%.3f, p=%.3f' % (stat, p))
+    # interpret
+    alpha = 0.1
+    if p > alpha:
+        print('Sample looks Gaussian (fail to reject H0)')
+    else:
+        print('Sample does not look Gaussian (reject H0)')
+
+
+
+if __name__ == "__main__":
+    # qqplot_1a(x)
+    shapiro_test_1b(x)
